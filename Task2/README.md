@@ -47,12 +47,6 @@ The annotations, query files, source PDFs, and rendered page images are
 not included. Page images can be generated from the source reports using
 the corresponding `pdf_to_images_*.py` scripts.
 
-## Language-Specific Notes
-
-- Japanese scripts use the newer query format containing the `PDF_Page`
-  field.
-- Some language-specific pipelines use mixed query files because of
-  differences in the original annotation format.
 
 ## Requirements
 
