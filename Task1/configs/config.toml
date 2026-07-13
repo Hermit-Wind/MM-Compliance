@@ -1,0 +1,52 @@
+[statistics]
+root = 'Your Output Path'
+
+[running]
+use_retrieval = true
+retriever_type = 'image'
+test_languages = [
+#    'english',
+#    'french',
+    'japanese',
+#    'chinese',
+#    'thai',
+#    'korean',
+]
+mode = 'production'
+
+[data]
+root = 'Your Data Path'
+retrieval_ratio = 1.0
+input_type = 'image'
+
+[data.chinese]
+highest = [
+    "TSMC",
+    "FPCC",
+    "pegavision",
+    "MFHC",
+    "LARGAN",
+]
+
+[data.cid_pdf_mapping]
+# Chinese
+alchip = 'Alchip'
+esun = 'E.SUN'
+fpcc = 'FPCC'
+gtg = 'GTG'
+inx = 'INX'
+kye = 'KYE'
+largan = 'LARGAN'
+mfhc = 'MFHC'
+npc = 'NPC'
+pegavision = 'pegavision'
+psi = 'PSI'
+spt = 'SPT'
+standard = 'Standard'
+tcfh = 'TCFH'
+tsmc = 'TSMC'
+
+[model]
+inference_model = ''
+image_encoder = ''
+
