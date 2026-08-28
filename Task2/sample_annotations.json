@@ -1,0 +1,62 @@
+[
+    {
+        "CID": "companyA-esg-report-2023.pdf",
+        "CID URL": "https://example.com/companyA-esg-report-2023.pdf",
+        "Industry": "Finance",
+        "SASB Standard": "Commercial Banks",
+        "Topic": "Data Security",
+        "Metric": "Description of approach to identifying and\naddressing data security risks",
+        "Code": "FN-CB-230a.2",
+        "Page": "22",
+        "Heading or Fragment": "Placeholder text of the report excerpt supporting this metric on this page.",
+        "Value": "N/A",
+        "Unit": "N/A",
+        "SASB Unit of Measurement": "N/A",
+        "Complete": true
+    },
+    {
+        "CID": "companyA-esg-report-2023.pdf",
+        "CID URL": "https://example.com/companyA-esg-report-2023.pdf",
+        "Industry": "Finance",
+        "SASB Standard": "Commercial Banks",
+        "Topic": "Data Security",
+        "Metric": "Description of approach to identifying and\naddressing data security risks",
+        "Code": "FN-CB-230a.2",
+        "Page": "34",
+        "Heading or Fragment": "Placeholder text of a second excerpt for the same metric on a different page.",
+        "Value": "N/A",
+        "Unit": "N/A",
+        "SASB Unit of Measurement": "N/A",
+        "Complete": true
+    },
+    {
+        "CID": "companyB-sustainability-report-2023.pdf",
+        "CID URL": "https://example.com/companyB-sustainability-report-2023.pdf",
+        "Industry": "Finance",
+        "SASB Standard": "Commercial Banks",
+        "Topic": "Business\nEthics",
+        "Metric": "Description of whistleblower policies and\nprocedures",
+        "Code": "FN-CB-510a.2",
+        "Page": "7",
+        "Heading or Fragment": "Placeholder text of an excerpt related to this metric.",
+        "Value": "N/A",
+        "Unit": "N/A",
+        "SASB Unit of Measurement": "N/A",
+        "Complete": false
+    },
+    {
+        "CID": "companyC-annual-report-2023.pdf",
+        "CID URL": "https://example.com/companyC-annual-report-2023.pdf",
+        "Industry": "Energy",
+        "SASB Standard": "Oil & Gas - Exploration & Production",
+        "Topic": "Greenhouse Gas\nEmissions",
+        "Metric": "Gross global Scope 1 emissions",
+        "Code": "EM-EP-110a.1",
+        "Page": "45",
+        "Heading or Fragment": "Placeholder text of the excerpt reporting this quantitative metric.",
+        "Value": "1234",
+        "Unit": "tCO2e",
+        "SASB Unit of Measurement": "Metric tons (t) CO2-e",
+        "Complete": true
+    }
+]

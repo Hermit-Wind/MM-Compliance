@@ -1,0 +1,29 @@
+{
+  "queries": [
+    {
+      "CID": "companyA-esg-report-2023.pdf",
+      "industry": "Finance",
+      "code": "FN-CB-230a.2",
+      "topic": "Data Security",
+      "metric": "Description of approach to identifying and addressing data security risks",
+      "query_text": "Description of approach to identifying and addressing data security risks",
+      "relevant_docs": [
+        "companyA-esg-report-2023_p022.png",
+        "companyA-esg-report-2023_p034.png"
+      ],
+      "complete_flag": true
+    },
+    {
+      "CID": "companyB-sustainability-report-2023.pdf",
+      "industry": "Finance",
+      "code": "FN-CB-510a.2",
+      "topic": "Business Ethics",
+      "metric": "Description of whistleblower policies and procedures",
+      "query_text": "Description of whistleblower policies and procedures",
+      "relevant_docs": [
+        "companyB-sustainability-report-2023_p007.png"
+      ],
+      "complete_flag": false
+    }
+  ]
+}
