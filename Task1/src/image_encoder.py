@@ -1,6 +1,6 @@
 import torch
 from functools import lru_cache
-from typing import List, Dict
+from typing import Dict
 from pathlib import Path
 from PIL import Image
 from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
@@ -9,6 +9,7 @@ from src.config.config import get_config
 
 CFG = get_config()
 CACHE_FILE = Path(CFG.data.root) / 'target' / 'image_emb_cache.pt'
+
 
 @lru_cache
 def get_model():
@@ -24,6 +25,7 @@ def get_model():
 
     return model, processor
 
+
 @lru_cache
 def load_cache(cache_file: Path) -> Dict[str, torch.Tensor]:
     if cache_file.exists():
@@ -33,9 +35,11 @@ def load_cache(cache_file: Path) -> Dict[str, torch.Tensor]:
         print(f'Warning: cache file not found in {str(cache_file)}')
         return {}
 
+
 def save_cache(cache: Dict[str, torch.Tensor], cache_file: Path) -> None:
     cache_file.parent.mkdir(parents=True, exist_ok=True)
     torch.save(cache, cache_file)
+
 
 def get_embeddings_with_cache(
         image_path: str,
@@ -56,6 +60,7 @@ def get_embeddings_with_cache(
     else:
         return cache[image_name]
 
+
 def encode(image_path: str) -> torch.Tensor:
     model, processor = get_model()
     image_encoder = model.visual
@@ -73,7 +78,7 @@ def encode(image_path: str) -> torch.Tensor:
 
     vision_inputs, _ = process_vision_info(messages)
     inputs = processor(
-        text = [""],
+        text=[""],
         images=vision_inputs,
         videos=None,
         padding=True,
@@ -91,4 +96,3 @@ def encode(image_path: str) -> torch.Tensor:
             image_emb = patch_feats.mean(dim=0, keepdim=True)  # (1, D)
 
     return image_emb
-

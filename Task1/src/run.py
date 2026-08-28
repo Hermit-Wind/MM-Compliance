@@ -1,6 +1,5 @@
 import json
 import re
-import json
 import random
 import time
 from typing import List, Dict, Tuple
@@ -17,6 +16,7 @@ from src.models.visrag import predict
 
 CFG = get_config()
 
+
 def collect_cases(language: str, use_retrieval: bool) -> Tuple[List[Dict], List[Dict]]:
     annotation_path = Path(CFG.data.root) / 'target' / language / 'annotations'
     test_cases = []
@@ -32,30 +32,33 @@ def collect_cases(language: str, use_retrieval: bool) -> Tuple[List[Dict], List[
     else:
         return test_cases, []
 
+
 def extract_answer(text: str, tag: str) -> str | None:
     pattern = fr"<{tag}>(.*?)</{tag}>"
-    match = re.search(pattern, text, flags = re.DOTALL)
+    match = re.search(pattern, text, flags=re.DOTALL)
     if match:
         return match.group(1).strip()
     return None
 
+
 def write_back(labels, predictions):
     json_list = [
-        {'label': l, 'prediction': p}
-        for l, p in zip(labels, predictions)
+        {'label': label, 'prediction': p}
+        for label, p in zip(labels, predictions)
     ]
 
     result_path = Path(CFG.statistics.root)
     file_name = time.strftime("%Y-%m-%d_%H%M", time.localtime())
     file_name = f'{file_name}.json'
 
-    with open(result_path / file_name, 'w+', encoding = 'utf-8') as f:
+    with open(result_path / file_name, 'w+', encoding='utf-8') as f:
         json.dump(
             json_list,
             f,
-            ensure_ascii = False,
-            indent = 4
+            ensure_ascii=False,
+            indent=4
         )
+
 
 def run(language: str) -> None:
     retriever_type: str = CFG.running.retriever_type
@@ -67,10 +70,10 @@ def run(language: str) -> None:
     formated_retrieval: List[Case] = [generate_case(language, case) for case in retrieval_cases]
 
     retrieval_pool = RetrievalPool(
-        base_cases = formated_retrieval,
-        cache_path = emb_cache_path,
-        ratio = CFG.data.retrieval_ratio,
-        type = retriever_type,
+        base_cases=formated_retrieval,
+        cache_path=emb_cache_path,
+        ratio=CFG.data.retrieval_ratio,
+        type=retriever_type,
     )
 
     labels = []
@@ -105,7 +108,6 @@ def run(language: str) -> None:
         except Exception as e:
             print(f'Err: perform prediction failed, {e}')
             continue
-        #output = predict([], prompt)
 
         pred_opt: str | None = extract_answer(output, 'answer')
         if pred_opt is None:
@@ -122,20 +124,20 @@ def run(language: str) -> None:
             mis_case['pred'] = pred
             mis_preds.append({'case': mis_case, 'output': output})
 
-
     write_back(labels, preds)
 
     report_context = ReportContext(
-        language = language,
-        config = CFG,
-        test_cases = formated_test,
-        retrieval_cases = [] if not retrieval_pool else retrieval_pool.get_all_cases(),
-        ground_truth = labels,
-        preds = preds,
-        mis_preds = mis_preds,
+        language=language,
+        config=CFG,
+        test_cases=formated_test,
+        retrieval_cases=[] if not retrieval_pool else retrieval_pool.get_all_cases(),
+        ground_truth=labels,
+        preds=preds,
+        mis_preds=mis_preds,
     )
 
     report(report_context)
+
 
 def main() -> None:
     test_languages = CFG.running.test_languages

@@ -13,6 +13,7 @@ from sklearn.metrics import (
 from src.config.config import Config
 from src.case_formater import Case
 
+
 @dataclass
 class ReportContext():
     language: str
@@ -22,6 +23,7 @@ class ReportContext():
     ground_truth: List[str]
     preds: List[str]
     mis_preds: List[Dict]
+
 
 def generate_report_name(context: ReportContext) -> str:
     current = time.localtime()
@@ -36,6 +38,7 @@ def generate_report_name(context: ReportContext) -> str:
         file_name += f'_retrieval_{retrieval_type}'
     file_name += f'_{time_str}'
     return file_name
+
 
 def generate_summary(config: Config) -> str:
     languages = ",".join(config.running.test_languages)
@@ -52,6 +55,7 @@ Retrieval ratio: {retrieval_ratio}
 """
 
     return summary
+
 
 def report_data_distribution(cases: List[Case]) -> str:
     label_counts: Dict[str, int] = {}
@@ -79,26 +83,27 @@ def report_data_distribution(cases: List[Case]) -> str:
 """
     return distribution
 
+
 def draw_confusion(report_path: Path, trues: List[str], preds: List[str]) -> None:
     labels = list(set(trues + preds)).sort()
 
-    cm = confusion_matrix(trues, preds, labels = labels)
-    fig, ax = plt.subplots(figsize = (15, 15))
+    cm = confusion_matrix(trues, preds, labels=labels)
+    fig, ax = plt.subplots(figsize=(15, 15))
 
     disp = ConfusionMatrixDisplay(
-        confusion_matrix = cm,
-        display_labels = labels
+        confusion_matrix=cm,
+        display_labels=labels
     )
 
     disp.plot(
-        ax = ax,
-        cmap = 'Blues',
-        colorbar = True,
-        values_format = "d"
+        ax=ax,
+        cmap='Blues',
+        colorbar=True,
+        values_format="d"
     )
 
-    ax.set_xlabel('prediction', fontsize = 18)
-    ax.set_ylabel('ground truth', fontsize = 18)
+    ax.set_xlabel('prediction', fontsize=18)
+    ax.set_ylabel('ground truth', fontsize=18)
     ax.tick_params(axis="x", labelsize=18)
     ax.tick_params(axis="y", labelsize=18)
 
@@ -107,6 +112,7 @@ def draw_confusion(report_path: Path, trues: List[str], preds: List[str]) -> Non
 
     plt.tight_layout()
     plt.savefig(report_path / 'confusion_matrix.png')
+
 
 def write_summary(
     config: Config,
@@ -135,14 +141,15 @@ Results:
 {metrics}
 """
 
-    with open(report_path / 'summary.output', 'w+', encoding = 'utf-8') as f:
+    with open(report_path / 'summary.output', 'w+', encoding='utf-8') as f:
         f.write(report)
+
 
 def report_error(report_path: Path, mis_preds: List[Dict]) -> None:
     mis_cases = [item['case'] for item in mis_preds]
     output = [item['output'] for item in mis_preds]
     with open(report_path / 'err.json', 'w') as f:
-        json.dump(mis_cases, f, indent = 4, ensure_ascii = False)
+        json.dump(mis_cases, f, indent=4, ensure_ascii=False)
 
     with open(report_path / 'err.output', 'w') as f:
         for item in output:
@@ -150,12 +157,7 @@ def report_error(report_path: Path, mis_preds: List[Dict]) -> None:
             f.write(item)
             f.write('\n')
 
-# Report Contents
-# Test language
-# Use retrieval
-# Retrieval Strategy
-# Test data distribution
-# Knowlege base data distribution
+
 def report(
     context: ReportContext,
 ) -> None:
@@ -163,7 +165,7 @@ def report(
     report_path: Path = Path(context.config.statistics.root)
     report_name: str = generate_report_name(context)
     report_path = report_path / report_name
-    report_path.mkdir(parents = True, exist_ok = True)
+    report_path.mkdir(parents=True, exist_ok=True)
 
     write_summary(
         config,
@@ -177,8 +179,10 @@ def report(
     draw_confusion(report_path, context.ground_truth, context.preds)
     report_error(report_path, context.mis_preds)
 
+
 def main() -> None:
     ...
+
 
 if __name__ == '__main__':
     main()

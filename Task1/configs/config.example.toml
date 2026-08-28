@@ -1,0 +1,94 @@
+# Task1 Configuration Template
+# Copy this file to config.toml and modify the paths for your setup
+# DO NOT commit actual config.toml with your real paths to version control
+
+[statistics]
+# Output directory where results will be saved
+# Example: '/home/user/results' or 'C:\Users\User\results' (Windows)
+root = '/path/to/your/output/directory'
+
+[running]
+# Enable/disable retrieval-augmented generation
+# true: Use similar cases for context
+# false: Analyze each case independently
+use_retrieval = true
+
+# Type of embedding for retrieval and input
+# Options: 'image' (visual features) or 'text' (textual features)
+retriever_type = 'image'
+
+# Languages to process
+# Uncomment the ones you want to process
+# The system will process each language sequentially
+test_languages = [
+    'english',
+    # 'french',
+    # 'japanese',
+    # 'chinese',
+    # 'thai',
+    # 'korean',
+]
+
+# Execution mode
+# 'production': Process the full dataset
+# 'debug': Process only 5% of the dataset (useful for testing)
+mode = 'production'
+
+[data]
+# Root directory containing your data
+# Structure should be: root/target/{language}/annotations/ and root/target/{language}/reports/
+# Example: '/home/user/esg_data'
+root = '/path/to/your/data/directory'
+
+# Ratio of retrieval dataset size relative to full dataset
+# 0.0: No retrieval data
+# 0.5: Use 50% of data for retrieval
+# 1.0: Use entire dataset for retrieval (default)
+# Only used when use_retrieval = true
+retrieval_ratio = 1.0
+
+# Type of input to use for analysis
+# 'image': Process images from reports/images/
+# 'text': Process text from reports/text/
+input_type = 'image'
+
+# Optional: Company-specific settings for different languages
+# This is used for organizing data by company
+[data.chinese]
+highest = [
+    "TSMC",
+    "FPCC",
+    "pegavision",
+    "MFHC",
+    "LARGAN",
+]
+
+# CID (Company ID) to PDF mapping
+# Maps short CID codes to full company names
+[data.cid_pdf_mapping]
+alchip = 'Alchip'
+esun = 'E.SUN'
+fpcc = 'FPCC'
+gtg = 'GTG'
+inx = 'INX'
+kye = 'KYE'
+largan = 'LARGAN'
+mfhc = 'MFHC'
+npc = 'NPC'
+pegavision = 'pegavision'
+psi = 'PSI'
+spt = 'SPT'
+standard = 'Standard'
+tcfh = 'TCFH'
+tsmc = 'TSMC'
+
+[model]
+# Inference model for visual question answering
+# Empty string: Use default (Boggy666/EVisRAG-7B)
+# Custom: Specify your own model identifier
+inference_model = ''
+
+# Image encoder model
+# Empty string: Use default (Qwen/Qwen2.5-VL-3B-Instruct)
+# Custom: Specify your own model identifier
+image_encoder = ''
