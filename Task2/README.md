@@ -41,22 +41,18 @@ Recall@K, and Precision@K.
 
 ## Data
 
-This repository contains code only. The annotations, query files, source PDFs,
-and rendered page images are not included.
+The original annotations, query files, source PDFs, and rendered page images used in the experiments are not included.
 
-`sample_data/` provides dummy files showing the expected formats:
+`sample_data/` provides dummy examples illustrating the expected data formats:
 
-- `sample_annotations.json` — the annotation file read by `build_queries_*.py`
-- `sample_queries_finance.json` — the query file it produces, read by
-  `run_colqwen_retrieval_eval_*.py`
+- `sample_annotations.json` — an example annotation file used by `build_queries_*.py`
+- `sample_queries_finance.json` — an example query file produced from the annotations
 
-Replace the input annotation path in `build_queries_*.py` with your own JSON
-file following the format shown in `sample_data/sample_annotations.json`.
-Page images are named `{CID stem}_p{page:03d}.png` and must keep this naming,
-as it is used for document-boundary filtering.
+Replace the input annotation path in `build_queries_*.py` with your own JSON file following the format shown in `sample_data/sample_annotations.json`.
 
-Page images can be generated from the source reports using the corresponding
-`pdf_to_images_*.py` scripts.
+Page images are named `{CID stem}_p{page:03d}.png` and must keep this naming convention, as it is used for document-boundary filtering.
+
+Page images can be generated from the source reports using the corresponding `pdf_to_images_*.py` scripts.
 
 
 ## Requirements
