@@ -2,6 +2,7 @@ from transformers import AutoProcessor
 from vllm import LLM, SamplingParams
 from qwen_vl_utils import process_vision_info
 
+
 def get_model():
     if hasattr(get_model, '_model'):
         return get_model._model
@@ -11,14 +12,15 @@ def get_model():
     llm = LLM(
         model=model_path,
         tensor_parallel_size=1,
-        gpu_memory_utilization = 0.7,
+        gpu_memory_utilization=0.7,
         dtype="bfloat16",
-        limit_mm_per_prompt={"image":5, "video":0},
+        limit_mm_per_prompt={"image": 5, "video": 0},
     )
 
     get_model._model = (llm, processor)
 
     return (llm, processor)
+
 
 def predict(imgs, prompt):
     sampling_params = SamplingParams(
@@ -56,8 +58,8 @@ def predict(imgs, prompt):
         }]
 
         output_texts = llm.generate(msg_input,
-            sampling_params=sampling_params,
-        )
+                                    sampling_params=sampling_params,
+                                    )
 
         return output_texts[0].outputs[0].text
     else:
@@ -66,10 +68,7 @@ def predict(imgs, prompt):
         }]
 
         output_texts = llm.generate(msg_input,
-            sampling_params=sampling_params,
-        )
+                                    sampling_params=sampling_params,
+                                    )
 
         return output_texts[0].outputs[0].text
-
-
-

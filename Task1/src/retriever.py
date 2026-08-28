@@ -6,7 +6,8 @@ from typing import List
 from .case_formater import Case
 import src.encoder as encoder
 
-device:torch.device = torch.device('cuda')
+device: torch.device = torch.device('cuda')
+
 
 class RetrievalPool():
 
@@ -60,19 +61,23 @@ class RetrievalPool():
 
         if self.retriever_type == 'image':
             candidate_embs = [
-                encoder.get_embedding_with_cache(case.image_path, self.cache_path, encoder.ENCODER_IMAGE).to(device) for case in candidates
-            ]
+                encoder.get_embedding_with_cache(
+                    case.image_path,
+                    self.cache_path,
+                    encoder.ENCODER_IMAGE).to(device) for case in candidates]
         elif self.retriever_type == 'text':
             candidate_embs = [
-                encoder.get_embedding_with_cache(case.text_path, self.cache_path, encoder.ENCODER_TEXT).to(device) for case in candidates
-            ]
+                encoder.get_embedding_with_cache(
+                    case.text_path,
+                    self.cache_path,
+                    encoder.ENCODER_TEXT).to(device) for case in candidates]
         else:
             raise ValueError(f'Unsupported retriever type: {self.retriever_type}')
 
-        candidate_embs = torch.stack(candidate_embs, dim = 0)
+        candidate_embs = torch.stack(candidate_embs, dim=0)
         candidate_embs = candidate_embs.squeeze(1)
 
-        sim = F.cosine_similarity(candidate_embs, expanded_emb, dim = 1)
+        sim = F.cosine_similarity(candidate_embs, expanded_emb, dim=1)
         index = int(torch.argmax(sim))
 
         return candidates[index]
@@ -92,4 +97,3 @@ class RetrievalPool():
     def get_all_cases(self) -> List[Case]:
         all_cases = [item for shard in self.case_shards for item in shard]
         return all_cases
-
