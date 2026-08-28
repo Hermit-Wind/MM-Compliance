@@ -1,0 +1,53 @@
+[
+  {
+    "topic": "Greenhouse Gas Emissions",
+    "sid": "(1) Gross global Scope 1 emissions and (2) amount of total emissions from perfluorinated compounds",
+    "page": 57,
+    "value": "38,134",
+    "unit": "tCO2-eq",
+    "complete": true,
+    "ambiguous": false,
+    "x1": 130,
+    "y1": 222,
+    "x2": 504,
+    "y2": 263,
+    "cid": "hana_micron",
+    "metric": "(1) Gross global Scope 1 emissions and (2) amount of total emissions from perfluorinated compounds",
+    "file_stem": "hana_micron_057",
+    "label": "no"
+  },
+  {
+    "topic": "Greenhouse Gas Emissions",
+    "sid": "(1) Gross global Scope 1 emissions and (2) amount of total emissions from perfluorinated compounds",
+    "page": 22,
+    "value": "38,134",
+    "unit": "tCO2-eq",
+    "complete": true,
+    "ambiguous": false,
+    "x1": 243,
+    "y1": 452,
+    "x2": 312,
+    "y2": 471,
+    "cid": "hana_micron",
+    "metric": "(1) Gross global Scope 1 emissions and (2) amount of total emissions from perfluorinated compounds",
+    "file_stem": "hana_micron_022",
+    "label": "yes"
+  },
+  {
+    "topic": "Greenhouse Gas Emissions",
+    "sid": "Discussion of long- and short-term strategy or plan to manage Scope 1 emissions, emissions reduction targets, and an analysis of performance against those targets",
+    "page": 22,
+    "value": null,
+    "unit": null,
+    "complete": false,
+    "ambiguous": true,
+    "x1": 130,
+    "y1": 201,
+    "x2": 905,
+    "y2": 654,
+    "cid": "hana_micron",
+    "metric": "Discussion of long- and short-term strategy or plan to manage Scope 1 emissions, emissions reduction targets, and an analysis of performance against those targets",
+    "file_stem": "hana_micron_022",
+    "label": "yes but not complete"
+  }
+]
